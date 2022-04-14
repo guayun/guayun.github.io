@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>5秒盾 - Powered by Gua</title>
+		<link href="https://guaz.gitee.io/gua/icons/web/index.png" rel="shortcut icon">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: "Microsoft yahei", Arial;
+			}
+			a {
+				text-decoration: none;
+			}
+			body {
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				background: #ebf5fc;
+			}
+			ul {
+				margin-top: 5vh;
+				position: relative;
+				justify-content: center;
+				align-items: center;
+				flex-wrap: wrap;
+				border-radius: 10px;
+				padding: 20px;
+				width: 240px;
+				background: #ebf5fc;
+				box-shadow: -2px -2px 5px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
+			}
+			div,
+			p,
+			a {
+				color: #61677C;
+			}
+			.text {
+				color: #61677C;
+				font-weight: bold;
+			}
+			.top {
+				margin-top: 8vh;
+			}
+			.footer {
+				margin-top: 8vh;
+				margin-bottom: 8vh;
+			}
+			.loader {
+				border: 15px solid #61677C;
+				border-radius: 50%;
+				border-top: 15px solid #ebf5fc;
+				width: 100px;
+				height: 100px;
+				-webkit-animation: spin 2s linear infinite;
+				animation: spin 2s linear infinite;
+				margin-bottom: 10px;
+			}
+			@-webkit-keyframes spin {
+				0% {
+					-webkit-transform: rotate(0deg);
+				}
+
+				100% {
+					-webkit-transform: rotate(360deg);
+				}
+			}
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+		</style>
+		<script type="text/javascript">
+			var maxtime = 5;
+
+			function CountDown() {
+				if (maxtime >= 0) {
+					minutes = Math.floor(maxtime / 60);
+					seconds = Math.floor(maxtime % 60);
+					msg = "请等待 " + seconds + " 秒";
+					if (maxtime == 0) {
+						msg = "稍等，即将进入网页！";
+					}
+					document.all["timer"].innerHTML = msg;
+					--maxtime;
+				} else {
+					clearInterval(timer);
+
+				}
+			}
+			timer = setInterval("CountDown()", 1000);
+		</script>
+	</head>
+	<body>
+		<div style="display:none">::IM_UNDER_ATTACK_BOX::</div>
+		<div align="center" class="top">
+			<div class="loader"></div>
+			<h3>Loding...</h3>
+			<ul>
+				<h1>您好</h1>
+				<h2>欢迎您访问呱呱网</h2>
+				<br>
+				<p class="text">我们的网站正在面临大量的攻击，因此需要检查您是否为攻击者</p>
+				<p class="text">此过程我们可能会记录您的IP地址</p>
+				<br>
+				<h2 id="timer">页面加载中...</h2>
+				<br>
+				<p class="text">您的IP::CLIENT_IP::已被记录</p>
+			</ul>
+			<p class="footer">&copy;呱呱不识字<br>本站已安全运行：<a id="momk"></a></p>
+		</div>
+		<script language="javascript">
+			function show_date_time() {
+				window.setTimeout("show_date_time()", 1000);
+				BirthDay = new Date("2020/05/09 09:30:24");
+				today = new Date();
+				timeold = (today.getTime() - BirthDay.getTime());
+				sectimeold = timeold / 1000
+				secondsold = Math.floor(sectimeold);
+				msPerDay = 24 * 60 * 60 * 1000
+				e_daysold = timeold / msPerDay
+				daysold = Math.floor(e_daysold);
+				e_hrsold = (daysold - e_daysold) * -24;
+				hrsold = Math.floor(e_hrsold);
+				e_minsold = (hrsold - e_hrsold) * -60;
+				minsold = Math.floor((hrsold - e_hrsold) * -60);
+				seconds = Math.floor((minsold - e_minsold) * -60);
+				momk.innerHTML = daysold + "天" + hrsold + "时" + minsold + "分" + seconds + "秒";
+			}
+			show_date_time();
+		</script>
+	</body>
+</html>

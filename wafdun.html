@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="format-detection" content="telephone=no">
+		<title>WAF盾 - Powered by Gua</title>
+		<link href="https://guaz.gitee.io/gua/icons/web/index.png" rel="shortcut icon">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: "Microsoft yahei", Arial;
+			}
+			a {
+				text-decoration: none;
+			}
+			body {
+				justify-content: center;
+				align-items: center;
+				min-height: 100vh;
+				background: #ebf5fc;
+			}
+			ul {
+				margin-top: 5vh;
+				position: relative;
+				justify-content: center;
+				align-items: center;
+				flex-wrap: wrap;
+				border-radius: 10px;
+				padding: 20px;
+				width: 240px;
+				background: #ebf5fc;
+				box-shadow: -2px -2px 5px white, 3px 3px 5px rgba(0, 0, 0, 0.1);
+			}
+			div,
+			p,
+			a {
+				color: #61677C;
+			}
+			.text {
+				color: #61677C;
+				font-weight: bold;
+			}
+			.top {
+				margin-top: 8vh;
+			}
+			.footer {
+				margin-top: 8vh;
+				margin-bottom: 8vh;
+			}
+			.sa {
+			  width: 140px;
+			  height: 140px;
+			  padding: 26px;
+			  background-color: #ebf5fc;
+			}
+			.sa-error {
+			  border-radius: 50%;
+			  border: 4px solid #F27474;
+			  box-sizing: content-box;
+			  height: 80px;
+			  padding: 0;
+			  position: relative;
+			  background-color: #ebf5fc;
+			  width: 80px;
+			  animation: animateErrorIcon .5s;
+			}
+			.sa-error:after, .sa-error:before {
+			  background: #ebf5fc;
+			  content: '';
+			  height: 120px;
+			  position: absolute;
+			  transform: rotate(45deg);
+			  width: 60px;
+			}
+			.sa-error:before {
+			  border-radius: 40px 0 0 40px;
+			  width: 26px;
+			  height: 80px;
+			  top: -17px;
+			  left: 5px;
+			  transform-origin: 60px 60px;
+			  transform: rotate(-45deg);
+			}
+			.sa-error:after {
+			  border-radius: 0 120px 120px 0;
+			  left: 30px;
+			  top: -11px;
+			  transform-origin: 0 60px;
+			  transform: rotate(-45deg);
+			  animation: rotatePlaceholder 4.25s ease-in;
+			}
+			.sa-error-x {
+			  display: block;
+			  position: relative;
+			  z-index: 2;
+			}
+			.sa-error-placeholder {
+			  border-radius: 50%;
+			  border: 4px solid rgba(200, 0, 0, 0.2);
+			  box-sizing: content-box;
+			  height: 80px;
+			  left: -4px;
+			  position: absolute;
+			  top: -4px;
+			  width: 80px;
+			  z-index: 2;
+			}
+			.sa-error-fix {
+			  background-color: #ebf5fc;
+			  height: 90px;
+			  left: 28px;
+			  position: absolute;
+			  top: 8px;
+			  transform: rotate(-45deg);
+			  width: 5px;
+			  z-index: 1;
+			}
+			.sa-error-left, .sa-error-right {
+			  border-radius: 2px;
+			  display: block;
+			  height: 5px;
+			  position: absolute;
+			  z-index: 2;
+			  background-color: #F27474;
+			  top: 37px;
+			  width: 47px;
+			}
+			.sa-error-left {
+			  left: 17px;
+			  transform: rotate(45deg);
+			  animation: animateXLeft .75s;
+			}
+			.sa-error-right {
+			  right: 16px;
+			  transform: rotate(-45deg);
+			  animation: animateXRight .75s;
+			}
+			
+			@keyframes rotatePlaceholder {
+			  0%, 5% {
+			    transform: rotate(-45deg);
+			  }
+			  100%,12% {
+			    transform: rotate(-405deg);
+			  }
+			}
+			@keyframes animateErrorIcon {
+			  0% {
+			    transform: rotateX(100deg);
+			    opacity: 0;
+			  }
+			  100% {
+			    transform: rotateX(0deg);
+			    opacity: 1;
+			  }
+			}
+			@keyframes animateXLeft {
+			  0%, 65% {
+			    left: 82px;
+			    top: 95px;
+			    width: 0;
+			  }
+			  84% {
+			    left: 14px;
+			    top: 33px;
+			    width: 47px;
+			  }
+			  100% {
+			    left: 17px;
+			    top: 37px;
+			    width: 47px;
+			  }
+			}
+			@keyframes animateXRight {
+			  0%, 65% {
+			    right: 82px;
+			    top: 95px;
+			    width: 0;
+			  }
+			  84% {
+			    right: 14px;
+			    top: 33px;
+			    width: 47px;
+			  }
+			  100% {
+			    right: 16px;
+			    top: 37px;
+			    width: 47px;
+			  }
+			}
+		</style>
+	</head>
+	<body>
+		<div style="display:none">::IM_UNDER_ATTACK_BOX::</div>
+		<div align="center" class="top">
+			<div class="sa">
+			<div class="sa-error">
+				  <div class="sa-error-x">
+					  <div class="sa-error-left"></div>
+					  <div class="sa-error-right"></div>
+				  </div>
+				  <div class="sa-error-placeholder"></div>
+				  <div class="sa-error-fix"></div>
+			  </div>
+			  </div>
+			<h3>Error</h3>
+			<ul>
+				<h1>对不起</h1>
+				<h2>您的访问已被拒绝</h2>
+				<br>
+				<p class="text">您刚刚的操作触发了CloudFlare WAF防护</p>
+				<p class="text">请检查您提交的内容是否有恶意代码、SQL命令等内容</p>
+				<br>
+				<p class="text">您的IP::CLIENT_IP::已被记录</p>
+			</ul>
+			<p class="footer">&copy;呱呱不识字<br>本站已安全运行：<a id="momk"></a></p>
+		</div>
+		<script language="javascript">
+			function show_date_time() {
+				window.setTimeout("show_date_time()", 1000);
+				BirthDay = new Date("2020/05/09 09:30:24");
+				today = new Date();
+				timeold = (today.getTime() - BirthDay.getTime());
+				sectimeold = timeold / 1000
+				secondsold = Math.floor(sectimeold);
+				msPerDay = 24 * 60 * 60 * 1000
+				e_daysold = timeold / msPerDay
+				daysold = Math.floor(e_daysold);
+				e_hrsold = (daysold - e_daysold) * -24;
+				hrsold = Math.floor(e_hrsold);
+				e_minsold = (hrsold - e_hrsold) * -60;
+				minsold = Math.floor((hrsold - e_hrsold) * -60);
+				seconds = Math.floor((minsold - e_minsold) * -60);
+				momk.innerHTML = daysold + "天" + hrsold + "时" + minsold + "分" + seconds + "秒";
+			}
+			show_date_time();
+		</script>
+	</body>
+</html>
